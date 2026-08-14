@@ -1,0 +1,15 @@
+schema_version: unison-environment-profile.v1
+profile_id: dev-nuc
+state: active
+role: linux-development-integration
+os_family: ubuntu
+canonical_runtime: true
+capabilities:
+  - python-3.12
+  - container-build
+  - clean-worktree-validation
+  - tailscale-ssh-target
+prohibitions:
+  - production-claim
+  - physical-hardware-qualification-without-fixture
+evidence_class: simulation

@@ -1,0 +1,16 @@
+schema_version: unison-environment-profile.v1
+profile_id: gpu-lab
+state: deferred
+role: inference-deployment-qualification
+os_family: ubuntu
+canonical_runtime: true
+capabilities: []
+prohibitions:
+  - qualification-before-inventory
+  - production-claim
+evidence_class: planned
+activation_gates:
+  - hardware-inventory
+  - firmware-and-driver-baseline
+  - network-and-storage-plan
+  - power-and-thermal-instrumentation-plan

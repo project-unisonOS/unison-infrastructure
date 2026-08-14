@@ -1,0 +1,19 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://project-unisonos.github.io/schemas/environment-profile.v1.json",
+  "type": "object",
+  "additionalProperties": false,
+  "required": ["schema_version", "profile_id", "state", "role", "os_family", "canonical_runtime", "capabilities", "prohibitions", "evidence_class"],
+  "properties": {
+    "schema_version": {"const": "unison-environment-profile.v1"},
+    "profile_id": {"type": "string", "minLength": 1},
+    "state": {"enum": ["active", "deferred", "retired"]},
+    "role": {"type": "string", "minLength": 1},
+    "os_family": {"enum": ["windows", "ubuntu", "other"]},
+    "canonical_runtime": {"type": "boolean"},
+    "capabilities": {"type": "array", "items": {"type": "string"}, "uniqueItems": true},
+    "prohibitions": {"type": "array", "items": {"type": "string"}, "uniqueItems": true},
+    "evidence_class": {"enum": ["planned", "development", "simulation", "hosted-ci", "physical"]},
+    "activation_gates": {"type": "array", "items": {"type": "string"}, "uniqueItems": true}
+  }
+}

@@ -1,0 +1,15 @@
+schema_version: unison-environment-profile.v1
+profile_id: dev-windows-control
+state: active
+role: human-agent-control-plane
+os_family: windows
+canonical_runtime: false
+capabilities:
+  - codex-desktop
+  - git-coordination
+  - documentation
+  - tailscale-ssh-client
+prohibitions:
+  - production-secrets-authority
+  - canonical-linux-deployment
+evidence_class: development
