@@ -9,6 +9,19 @@ capabilities:
   - container-build
   - clean-worktree-validation
   - tailscale-ssh-target
+workspace:
+  default_path: /srv/unison/unison-workspace
+  source_of_truth: github
+  required_entrypoints:
+    - ./scripts/bootstrap-dev.sh
+    - ./scripts/validate-phase0.sh
+    - ./scripts/test-unit.sh
+    - ./scripts/test-boundaries.sh
+access:
+  transports: [local-ssh, tailscale-ssh]
+  host_key_verification_required: true
+  passwordless_sudo_required: false
+  windows_filesystem_mount_required: false
 prohibitions:
   - production-claim
   - physical-hardware-qualification-without-fixture

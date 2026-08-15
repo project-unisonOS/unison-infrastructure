@@ -9,6 +9,11 @@ capabilities:
   - git-coordination
   - documentation
   - tailscale-ssh-client
+remote_development:
+  target_profile: dev-nuc
+  wrapper: scripts/remote-dev.ps1
+  source_checkout_on_windows_required: false
+  secret_forwarding: prohibited
 prohibitions:
   - production-secrets-authority
   - canonical-linux-deployment
