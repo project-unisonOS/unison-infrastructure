@@ -1,0 +1,35 @@
+schema_version: unison-environment-profile.v1
+profile_id: appliance-candidate
+state: deferred
+role: durable-household-appliance-candidate
+os_family: ubuntu
+canonical_runtime: true
+capabilities:
+  - provider-blind-backup
+  - replacement-device-restore
+  - mounted-root-key-broker
+prohibitions:
+  - root-secret-in-environment
+  - root-secret-in-compose
+  - restore-without-local-confirmation
+  - production-claim-before-hardware-evidence
+evidence_class: planned
+activation_gates:
+  - named-hardware-inventory
+  - encrypted-system-volume
+  - tpm2-or-hsm-custody-decision
+  - clean-replacement-restore-drill
+key_custody:
+  provider: mounted-file-simulation
+  root_secret_file: /run/credentials/unison/root-key
+  environment_secret_prohibited: true
+  required_mode: "0600"
+  rotation_ceremony: dual-control-stage-verify-activate-rewrap-revoke
+  recovery_authority: independent-person-recovery-key
+backup_restore:
+  provider_blind: true
+  checkpoint_witness: /var/lib/unison/checkpoints
+  journal_path: /var/lib/unison/backup-journal
+  restore_confirmation: local-non-voice
+  replacement_device_revocation: true
+  drill_interval_days: 90

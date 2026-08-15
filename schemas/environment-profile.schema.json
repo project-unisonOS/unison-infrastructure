@@ -14,6 +14,25 @@
     "capabilities": {"type": "array", "items": {"type": "string"}, "uniqueItems": true},
     "prohibitions": {"type": "array", "items": {"type": "string"}, "uniqueItems": true},
     "evidence_class": {"enum": ["planned", "development", "simulation", "hosted-ci", "physical"]},
-    "activation_gates": {"type": "array", "items": {"type": "string"}, "uniqueItems": true}
+    "activation_gates": {"type": "array", "items": {"type": "string"}, "uniqueItems": true},
+    "key_custody": {
+      "type": "object", "additionalProperties": false,
+      "required": ["provider", "root_secret_file", "environment_secret_prohibited", "required_mode", "rotation_ceremony", "recovery_authority"],
+      "properties": {
+        "provider": {"enum": ["mounted-file-simulation", "systemd-credential", "tpm2-sealed", "hsm"]},
+        "root_secret_file": {"type": "string", "pattern": "^/"},
+        "environment_secret_prohibited": {"const": true}, "required_mode": {"const": "0600"},
+        "rotation_ceremony": {"type": "string", "minLength": 1}, "recovery_authority": {"type": "string", "minLength": 1}
+      }
+    },
+    "backup_restore": {
+      "type": "object", "additionalProperties": false,
+      "required": ["provider_blind", "checkpoint_witness", "journal_path", "restore_confirmation", "replacement_device_revocation", "drill_interval_days"],
+      "properties": {
+        "provider_blind": {"const": true}, "checkpoint_witness": {"type": "string", "pattern": "^/"},
+        "journal_path": {"type": "string", "pattern": "^/"}, "restore_confirmation": {"const": "local-non-voice"},
+        "replacement_device_revocation": {"const": true}, "drill_interval_days": {"type": "integer", "minimum": 1, "maximum": 365}
+      }
+    }
   }
 }
